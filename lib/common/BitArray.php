@@ -87,7 +87,7 @@ final class BitArray  {
      */
     public function set($i) {
         $this->bits[intval($i / 32)] |= 1 << ($i & 0x1F);
-        $this->bits[intval($i / 32)] = overflow($this->bits[intval($i / 32)]);
+        $this->bits[intval($i / 32)] = overflow32($this->bits[intval($i / 32)]);
     }
 
     /**
@@ -166,7 +166,7 @@ final class BitArray  {
      */
     public function setRange($start, $end) {
         if ($end < $start) {
-            throw new InvalidArgumentException();
+            throw new \InvalidArgumentException();
         }
         if ($end == $start) {
             return;
@@ -207,11 +207,11 @@ final class BitArray  {
      * @param end end of range, exclusive
      * @param value if true, checks that bits in range are set, otherwise checks that they are not set
      * @return true iff all bits are set or not set in range, according to value argument
-     * @throws InvalidArgumentException if end is less than or equal to start
+     * @throws \InvalidArgumentException if end is less than or equal to start
      */
     public function isRange($start, $end, $value) {
         if ($end < $start) {
-            throw new InvalidArgumentException();
+            throw new \InvalidArgumentException();
         }
         if ($end == $start) {
             return true; // empty range matches
@@ -259,7 +259,7 @@ final class BitArray  {
      */
     public function appendBits($value, $numBits) {
         if ($numBits < 0 || $numBits > 32) {
-            throw new InvalidArgumentException("Num bits must be between 0 and 32");
+            throw new \InvalidArgumentException("Num bits must be between 0 and 32");
         }
         $this->ensureCapacity($this->size + $numBits);
         for ($numBitsLeft = $numBits; $numBitsLeft > 0; $numBitsLeft--) {
@@ -277,7 +277,7 @@ final class BitArray  {
 
     public function _xor($other) {
         if (count($this->bits) != count($other->bits)) {
-            throw new InvalidArgumentException("Sizes don't match");
+            throw new \InvalidArgumentException("Sizes don't match");
         }
         for ($i = 0; $i < count($this->bits); $i++) {
             // The last byte could be incomplete (i.e. not have 8 bits in

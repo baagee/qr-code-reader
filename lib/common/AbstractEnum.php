@@ -51,7 +51,7 @@ final class AbstractEnum
     public function change($value)
     {
         if (!in_array($value, $this->getConstList(), $this->strict)) {
-            throw new Exception\UnexpectedValueException('Value not a const in enum ' . get_class($this));
+            throw new \UnexpectedValueException('Value not a const in enum ' . get_class($this));
         }
         $this->value = $value;
     }
