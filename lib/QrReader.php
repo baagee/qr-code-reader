@@ -1,5 +1,7 @@
 <?php
 
+namespace Zxing;
+
 include_once('Reader.php');
 require_once('BinaryBitmap.php');
 require_once('common/detector/MathUtils.php');
@@ -50,8 +52,8 @@ include_once('common/HybridBinarizer.php');
 
 final class QrReader
 {
-    const SOURCE_TYPE_FILE = 'file';
-    const SOURCE_TYPE_BLOB = 'blob';
+    const SOURCE_TYPE_FILE     = 'file';
+    const SOURCE_TYPE_BLOB     = 'blob';
     const SOURCE_TYPE_RESOURCE = 'resource';
 
     public $result;
@@ -60,12 +62,12 @@ final class QrReader
     {
 
         try {
-            switch($sourcetype) {
+            switch ($sourcetype) {
                 case QrReader::SOURCE_TYPE_FILE:
-                    if($isUseImagickIfAvailable && extension_loaded('imagick')) {
+                    if ($isUseImagickIfAvailable && extension_loaded('imagick')) {
                         $im = new Imagick();
                         $im->readImage($imgsource);
-                    }else {
+                    } else {
                         $image = file_get_contents($imgsource);
                         $im = imagecreatefromstring($image);
                     }
@@ -73,10 +75,10 @@ final class QrReader
                     break;
 
                 case QrReader::SOURCE_TYPE_BLOB:
-                    if($isUseImagickIfAvailable && extension_loaded('imagick')) {
+                    if ($isUseImagickIfAvailable && extension_loaded('imagick')) {
                         $im = new Imagick();
                         $im->readimageblob($imgsource);
-                    }else {
+                    } else {
                         $im = imagecreatefromstring($imgsource);
                     }
 
@@ -84,20 +86,20 @@ final class QrReader
 
                 case QrReader::SOURCE_TYPE_RESOURCE:
                     $im = $imgsource;
-                    if($isUseImagickIfAvailable && extension_loaded('imagick')) {
+                    if ($isUseImagickIfAvailable && extension_loaded('imagick')) {
                         $isUseImagickIfAvailable = true;
-                    }else {
+                    } else {
                         $isUseImagickIfAvailable = false;
                     }
 
                     break;
             }
 
-            if($isUseImagickIfAvailable && extension_loaded('imagick')) {
+            if ($isUseImagickIfAvailable && extension_loaded('imagick')) {
                 $width = $im->getImageWidth();
                 $height = $im->getImageHeight();
                 $source = new \Zxing\IMagickLuminanceSource($im, $width, $height);
-            }else {
+            } else {
                 $width = imagesx($im);
                 $height = imagesy($im);
                 $source = new \Zxing\GDLuminanceSource($im, $width, $height);
@@ -107,20 +109,20 @@ final class QrReader
             $reader = new \Zxing\Qrcode\QRCodeReader();
 
             $this->result = $reader->decode($bitmap);
-        }catch (\Zxing\NotFoundException $er){
+        } catch (\Zxing\NotFoundException $er) {
             $this->result = false;
-        }catch( \Zxing\FormatException $er){
+        } catch (\Zxing\FormatException $er) {
             $this->result = false;
-        }catch( \Zxing\ChecksumException $er){
+        } catch (\Zxing\ChecksumException $er) {
             $this->result = false;
         }
     }
 
     public function text()
     {
-        if(method_exists($this->result,'toString')) {
-            return  ($this->result->toString());
-        }else{
+        if (method_exists($this->result, 'toString')) {
+            return ($this->result->toString());
+        } else {
             return $this->result;
         }
     }

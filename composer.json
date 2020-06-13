@@ -1,0 +1,21 @@
+{
+    "name": "zxing/qr-reader",
+    "description": "PHP qr code reader library",
+    "keywords": [
+        "php",
+        "library",
+        "qr code"
+    ],
+    "minimum-stability": "stable",
+    "type": "library",
+    "license": "apache",
+    "autoload": {
+        "psr-4": {
+            "Zxing\\": "./lib"
+        }
+    },
+    "require": {
+        "php": ">=5.3",
+        "ext-gd": "*"
+    }
+}
