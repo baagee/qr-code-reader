@@ -8,7 +8,7 @@
     ],
     "minimum-stability": "stable",
     "type": "library",
-    "license": "apache",
+    "license": "GPL-2.0-only",
     "autoload": {
         "psr-4": {
             "Zxing\\": "./lib"
