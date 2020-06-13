@@ -1,6 +1,8 @@
 #php qr decoder 
 > php识别二维码, 不需要安装扩展 从哪里弄来的我也忘了，毕竟好几年了
 
+### 安装
+`composer require zxing/qr-reader`
 
 ### 使用
 ```
