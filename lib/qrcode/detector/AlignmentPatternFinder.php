@@ -18,7 +18,7 @@
 namespace Zxing\Qrcode\Detector;
 
 use Zxing\NotFoundException;
-use Zxing\ResultPointCallback;
+
 use Zxing\Common\BitMatrix;
 
 

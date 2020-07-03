@@ -48,7 +48,7 @@ $reverseHorizontal) {
 parent::__construct($width, $height);
 
 if ($left + $width > $dataWidth || $top + $height > $dataHeight) {
-throw new IllegalArgumentException("Crop rectangle does not fit within image data.");
+throw new \InvalidArgumentException("Crop rectangle does not fit within image data.");
 }
 
     $this->yuvData = $yuvData;
@@ -64,7 +64,7 @@ throw new IllegalArgumentException("Crop rectangle does not fit within image dat
   //@Override
   public function getRow($y, $row=null) {
     if ($y < 0 || $y >= getHeight()) {
-        throw new IllegalArgumentException("Requested row is outside the image: " + y);
+        throw new \InvalidArgumentException("Requested row is outside the image: " + $y);
     }
     $width = $this->getWidth();
     if ($row == null || count($row) < $width) {

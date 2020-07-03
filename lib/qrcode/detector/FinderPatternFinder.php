@@ -17,10 +17,10 @@
 
 namespace Zxing\Qrcode\Detector;
 
-use Zxing\DecodeHintType;
+
 use Zxing\NotFoundException;
 use Zxing\ResultPoint;
-use Zxing\ResultPointCallback;
+
 use Zxing\Common\BitMatrix;
 
 

@@ -19,15 +19,15 @@ namespace Zxing\Qrcode;
 
 require_once('detector/Detector.php');
 
-use Zxing\BarcodeFormat;
+
 use Zxing\BinaryBitmap;
 use Zxing\ChecksumException;
-use Zxing\DecodeHintType;
+
 use Zxing\FormatException;
 use Zxing\NotFoundException;
 use Zxing\Reader;
 use Zxing\Result;
-use Zxing\ResultMetadataType;
+
 use Zxing\ResultPoint;
 use Zxing\Common\BitMatrix;
 use Zxing\Common\DecoderResult;

@@ -18,7 +18,7 @@
 namespace Zxing\Qrcode\Decoder;
 
 use Zxing\ChecksumException;
-use Zxing\DecodeHintType;
+
 use Zxing\FormatException;
 use Zxing\Common\BitMatrix;
 use Zxing\Common\DecoderResult;

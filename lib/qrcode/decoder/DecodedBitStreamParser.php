@@ -17,12 +17,11 @@
 
 namespace Zxing\Qrcode\Decoder;
 
-use Zxing\DecodeHintType;
+
 use Zxing\FormatException;
 use Zxing\Common\BitSource;
 use Zxing\Common\CharacterSetECI;
 use Zxing\Common\DecoderResult;
-use Zxing\Common\StringUtils;
 
 
 
@@ -122,7 +121,7 @@ final class DecodedBitStreamParser {
                     }
                 }
             } while ($mode != Mode::$TERMINATOR);
-        } catch (IllegalArgumentException $iae) {
+        } catch (\InvalidArgumentException $iae) {
             // from readBits() calls
             throw FormatException::getFormatInstance();
         }
@@ -169,7 +168,7 @@ final class DecodedBitStreamParser {
 
         try {
             $result .=  iconv('GB2312', 'UTF-8', implode($buffer));
-        } catch (UnsupportedEncodingException $ignored) {
+        } catch (\Exception $ignored) {
             throw FormatException::getFormatInstance();
         }
     }
@@ -207,7 +206,7 @@ final class DecodedBitStreamParser {
             $result .= iconv('shift-jis','utf-8',implode($buffer));
 
 
-        } catch (UnsupportedEncodingException $ignored) {
+        } catch (\Exception $ignored) {
             throw FormatException::getFormatInstance();
         }
     }
@@ -243,7 +242,7 @@ final class DecodedBitStreamParser {
         try {
           //  $result.= mb_convert_encoding($text ,$encoding);//(new String(readBytes, encoding));
             $result.= $text;//(new String(readBytes, encoding));
-        } catch (UnsupportedEncodingException $ignored) {
+        } catch (\Exception $ignored) {
             throw FormatException::getFormatInstance();
         }
         $byteSegments = array_merge($byteSegments, $readBytes);
