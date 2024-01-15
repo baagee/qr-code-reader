@@ -120,7 +120,7 @@ final class QrReader
 
     public function text()
     {
-        if (method_exists($this->result, 'toString')) {
+        if ($this->result && method_exists($this->result, 'toString')) {
             return ($this->result->toString());
         } else {
             return $this->result;
